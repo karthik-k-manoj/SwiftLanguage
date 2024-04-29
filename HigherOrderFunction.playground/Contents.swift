@@ -50,5 +50,19 @@ extension Array {
     func map<T>(_ transform: (Element) throws -> T) rethrows -> [T] { [] }
 }
 
+/* If you find yourself iterating over an array to perform same task or similar one more
+ than couple of times in your code, consider writing a short extension to `Array`. For example
+ following coe splits an array into groups of adjacement equal elements
+ */
 
+let array = [1,2,2,2,3,4,4]
+var result: [[Int]] = array.isEmpty ? [] : [[array[0]]]
+for (previous, current) in zip(array, array.dropFirst()) {
+    if previous == current {
+        result[result.endIndex - 1].append(current)
+    } else {
+        result.append([current])
+    }
+}
 
+print("Result", result)

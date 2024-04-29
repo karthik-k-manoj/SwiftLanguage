@@ -66,3 +66,30 @@ for (previous, current) in zip(array, array.dropFirst()) {
 }
 
 print("Result", result)
+
+/*
+    We can improve this with a split high order function that loops over the array in pairts of a
+    adjacent elments and logic to split varies from between application
+*/
+
+extension Array {
+    func split(where condition: (Element, Element) -> Bool) -> [[Element]] {
+        var result = self.isEmpty ? [] : [[self[0]]]
+        
+        for (previous, current) in zip(self, self.dropFirst()) {
+            if condition(previous, current) {
+                result.append([current])
+            } else {
+                result[result.endIndex - 1].append(current)
+            }
+        }
+        
+        return result
+    }
+}
+
+let parts = array.split { $0 != $1 }
+
+// or simpify it even more as
+
+let part2 = array.split(where: !=)

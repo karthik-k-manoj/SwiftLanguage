@@ -93,3 +93,7 @@ let parts = array.split { $0 != $1 }
 // or simpify it even more as
 
 let part2 = array.split(where: !=)
+
+/*
+    split(where:) operation is also part of Apple's Swift Algorthms package under the name `chunked(by:)`
+*/

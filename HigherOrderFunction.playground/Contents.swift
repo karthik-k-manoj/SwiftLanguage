@@ -22,6 +22,7 @@ let squared = nums.map { element in element * element }
 
 // Possbile implementation of `map`. In Swift it's an extension on `Sequence` protocol
 
+
 extension Array {
     func map<T>(_ transform: (Element) -> T) -> [T] {
         var result: [T] = []
@@ -97,3 +98,20 @@ let part2 = array.split(where: !=)
 /*
     split(where:) operation is also part of Apple's Swift Algorthms package under the name `chunked(by:)`
 */
+
+/*
+    Stateful closure with a high order function map to implement `accumulate` high order function
+*/
+
+extension Array {
+    func accumulate<Result>(_ initialResult: Result, _ nextPartialResult: (Result, Element) -> Result) -> [Result] {
+        var running = initialResult
+        
+        return map { next in
+            running = nextPartialResult(running, next)
+            return running
+        }
+    }
+}
+
+[1,2,3,4].accumulate(0, +)

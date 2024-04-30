@@ -227,3 +227,11 @@ extension Array {
 }
 
 let filterWithReduce = [1,2,3,4].filter2 { $0 % 2 == 0 }
+
+/*
+ This is kind of beautiful and has the benefit of not needing those icky imperative for loops. But there is a
+ problem. On every executon of the combine function a brand new array is created by appending the transformed
+ or included element to the previous. This means both these implementations are O(n^2) and not O(n).
+*/
+
+

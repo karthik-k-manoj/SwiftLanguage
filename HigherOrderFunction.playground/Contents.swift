@@ -146,4 +146,14 @@ let evenSquaredUnder100 = (1..<10).map { $0 * $0 }.filter { $0 % 2 == 0 }
 let lazyFilter = (1..<10).lazy.map { $0 * $0 }.filter { $0 % 2 == 0 }
 let filtered = Array(lazyFilter)
 
-
+/*
+    Secondly if you ever find yourself writing something like the following stop!
+    bigArray.filter { someCondition }.count > 0
+    
+    `filter` creates a brand-new array and proccess every element in the array. But this is unnecessary.
+    This code only needs to check if one element matches in which case, `contains(where:) will do the job
+ 
+    This is much faster for two reasons: it doesn't create a whole new array of the filtered elements jus to
+    count them, and it exits early - as soon as it finds the first match. Generally, only ever use filter if
+    you want all the results.
+ */

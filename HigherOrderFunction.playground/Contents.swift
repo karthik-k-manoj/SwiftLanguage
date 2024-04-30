@@ -202,4 +202,19 @@ let toString = [0,1,1,2,3,5].reduce("") { str, num in
     str + "\(num), "
 }
 
+/*
+ Another performance tip: reduce is very felxible, and it's common to see it used to build arrays
+ and perform other operations. For example, you can implement map and filter using reduce only
+*/
+
+extension Array {
+    func map2<T>(_ transform: (Element) -> T) -> [T] {
+        reduce([]) {
+            $0 + [transform($1)]
+        }
+    }
+}
+
+let mapWithReduce = [1,2,3,4].map2 { $0 * $0 }
+    
 

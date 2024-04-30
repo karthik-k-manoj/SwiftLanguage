@@ -115,3 +115,21 @@ extension Array {
 }
 
 [1,2,3,4].accumulate(0, +)
+
+
+// Filter higher order function
+
+extension Array {
+    func filter(_ isIncluded: (Element) -> Bool) -> [Element] {
+        var result: [Element] = []
+        
+        for x in self where isIncluded(x) {
+            result.append(x)
+        }
+        
+        return result
+    }
+}
+
+
+let evenSquaredUnder100 = (1..<10).map { $0 * $0 }.filter { $0 % 2 == 0 }

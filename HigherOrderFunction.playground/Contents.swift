@@ -165,3 +165,41 @@ bigArray.contains { $0 % 2 == 0 }
     count them, and it exits early - as soon as it finds the first match. Generally, only ever use filter if
     you want all the results.
  */
+
+/*
+    Reduce medthod abstracts two parts: the initial value and the function for combing the intermediate value
+    (total) and the element (num)
+*/
+
+extension Array {
+    func reduce<Result>(_ initialValue: Result, _ partialResult: (Result, Element) -> Result) -> Result {
+        var total = initialValue
+        
+        for x in self {
+            total = partialResult(total, x)
+        }
+        
+        return total
+    }
+}
+
+
+let sum = [0,1,1,2,3,5].reduce(0) { total, num in
+    total + num
+}
+
+// Operators are functions too, so we could've written the same example like this
+
+let simplifiedSum = [0,1,1,2,3,5].reduce(0, +)
+
+/*
+ Output type of reduce doesn't have to the same as the element type. For example, if we want to
+ convert a lit of integers into a string with each number followed by a comma and a space, we can do
+ the following
+*/
+
+let toString = [0,1,1,2,3,5].reduce("") { str, num in
+    str + "\(num), "
+}
+
+

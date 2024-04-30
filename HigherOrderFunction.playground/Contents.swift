@@ -218,3 +218,12 @@ extension Array {
 let mapWithReduce = [1,2,3,4].map2 { $0 * $0 }
     
 
+extension Array {
+    func filter2(_ isIncluded: (Element) -> Bool) -> [Element] {
+        reduce([]) {
+            isIncluded($1) ? $0 + [$1] : $0
+        }
+    }
+}
+
+let filterWithReduce = [1,2,3,4].filter2 { $0 % 2 == 0 }

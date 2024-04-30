@@ -133,3 +133,17 @@ extension Array {
 
 
 let evenSquaredUnder100 = (1..<10).map { $0 * $0 }.filter { $0 % 2 == 0 }
+
+/* Two quick perforamce tips
+ 
+ -  Note that chaining map and filter in this way creates an intermediate array (result of map operation) that's
+    then thrown away. This isn't a problem for our small example, but for large collections or long chains, the
+    extra allocations can negatively impact performance. We avoid these intermediate arrays by inserting `.lazy`
+    at the start of the chain, thereby making all transformations lazy. Only at the end do we convert the lazy
+    collection back into a regular array
+ */
+
+let lazyFilter = (1..<10).lazy.map { $0 * $0 }.filter { $0 % 2 == 0 }
+let filtered = Array(lazyFilter)
+
+

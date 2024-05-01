@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
  
 /*
  Transforming all elements of an array requries a lot of code which includes
@@ -235,3 +236,36 @@ let filterWithReduce = [1,2,3,4].filter2 { $0 % 2 == 0 }
 */
 
 
+/*
+ We can improve this using `inout` parameter for the `Result` type in closure parameter
+*/
+
+extension Array {
+    func reduce2<Result>(
+        _ initialResult: Result,
+        _ updateAccumulatingResult: (_ partialResult: inout Result, Element) -> Result
+    ) -> Result {
+        var total = initialResult
+        
+        for x in self {
+            total = updateAccumulatingResult(&total, x)
+        }
+        
+        return total
+    }
+}
+
+// We can now use `reduce2` to update the implement filter method in an optimized way
+
+extension Array {
+    func filter3(_ isIncluded: (Element) -> Bool) -> [Element] {
+        reduce(into: []) { partialResult, element in
+            if isIncluded(element) {
+                partialResult.append(element)
+            }
+        }
+    }
+}
+
+
+let filter3WithReduce2 = [1,2,3,4].filter3 { $0 % 2 == 0 }

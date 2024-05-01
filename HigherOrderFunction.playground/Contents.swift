@@ -255,7 +255,12 @@ extension Array {
     }
 }
 
-// We can now use `reduce2` to update the implement filter method in an optimized way
+/* We can now use `reduce2` to update the implement filter method in an optimized way. When using
+ `inout` the compiler doesn't have to create a new array each time, so this version of filter is agin
+ O(n). When the call to `reduce(into:_:) is inlined by the compiler, the generate code is often
+ same as when using a for lopp
+*/
+
 
 extension Array {
     func filter3(_ isIncluded: (Element) -> Bool) -> [Element] {
@@ -269,3 +274,4 @@ extension Array {
 
 
 let filter3WithReduce2 = [1,2,3,4].filter3 { $0 % 2 == 0 }
+

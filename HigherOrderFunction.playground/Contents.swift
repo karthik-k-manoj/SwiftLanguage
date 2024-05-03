@@ -282,6 +282,10 @@ let filter3WithReduce2 = [1,2,3,4].filter3 { $0 % 2 == 0 }
  `flatMap` method combines these two operations mapping and flattening into a single step.
 */
 
+/*
+ Signature of `flatMap` is almost identical to the `map`, expect it's transformation function returns an array
+ The implementation uses `append(contentsOf)` instead of `append(_:) to flatten the result array
+*/
 extension Array {
     func flatMap<T>(_ transform: (Element) -> [T]) -> [T] {
         var result: [T] = []
@@ -299,3 +303,19 @@ let flattedArray = [1,2,3,4].flatMap {
 }
 
 print("Flatmap: \(flattedArray)")
+
+/*
+ Another great use case for `flatMap` is combining elements from different arrays. To get all possible pairs of element in
+ two arrays, `flatMap` over one array and then map over the other in the transformation function of `flatMap`
+ */
+
+let array1 = ["A", "B", "C", "D"]
+let array2 = [1,2,3,4]
+
+let pairsArray = array1.flatMap { x in
+    array2.map { y in
+        (x,y)
+    }
+}
+
+print("Pairs Array", pairsArray)

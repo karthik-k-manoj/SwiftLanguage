@@ -275,3 +275,27 @@ extension Array {
 
 let filter3WithReduce2 = [1,2,3,4].filter3 { $0 % 2 == 0 }
 
+/*
+ Flatmap: Sometimes you want to map an array where the transformation functions returns another
+ array and not a single element. Basically what you do here is go through the array and get back an array
+ for each element of the source array, then we call `joined()` to flatten the result into a single array.
+ `flatMap` method combines these two operations mapping and flattening into a single step.
+*/
+
+extension Array {
+    func flatMap<T>(_ transform: (Element) -> [T]) -> [T] {
+        var result: [T] = []
+        
+        for x in self {
+            result.append(contentsOf: transform(x))
+        }
+        
+        return result
+    }
+}
+
+let flattedArray = [1,2,3,4].flatMap {
+    ["\($0)"]
+}
+
+print("Flatmap: \(flattedArray)")

@@ -322,3 +322,38 @@ let pairsArray = array1.flatMap { x in
 }
 
 print("Pairs Array", pairsArray)
+
+// Iteration using forEach
+
+/*
+ Works almost like a for loop. The passed in function is executed once for each element in the sequence.
+ It doesn't return anything. It's specifically meant for performing side effects.
+ */
+
+// Example
+
+[1,2,3].forEach { element in
+    print(element)
+}
+
+/*
+  We can pass a function name to `forEach` instead of passing a closure expression.
+ This can lead to clearer and more concise code
+ */
+
+let mainView = UIView()
+let childViews = [UIView(), UIView()]
+
+childViews.forEach(mainView.addSubview)
+
+// is more clearer than
+
+for view in childViews {
+    mainView.addSubview(view)
+}
+
+/* You might think what is the difference between the above and a for loop. `break` and `continue` cannot be used in
+ for each as it's a closure that is passed in. `where` clause can only be used in for loop. We should be using for loop
+ when there is kind of control flow while looping.
+ */
+

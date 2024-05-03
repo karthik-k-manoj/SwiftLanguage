@@ -1,6 +1,9 @@
 import UIKit
 import SwiftUI
  
+// What is a higer order function?
+// They are functions which takes one or more functions as arguments or returns a functions.
+
 /*
  Transforming all elements of an array requries a lot of code which includes
  creating a new array, looping through the array and appending to it.

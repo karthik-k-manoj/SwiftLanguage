@@ -85,3 +85,5 @@ loadFirstPosterFromEpisode { result in
         print("error", error)
     }
 }
+
+// another advantage of async/await is we can use `defer` to perform any actions that should be done before exiting the scope

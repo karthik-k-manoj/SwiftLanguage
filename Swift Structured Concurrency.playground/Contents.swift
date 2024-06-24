@@ -87,3 +87,18 @@ loadFirstPosterFromEpisode { result in
 }
 
 // another advantage of async/await is we can use `defer` to perform any actions that should be done before exiting the scope
+
+// How asynchronous functions execute
+
+/*
+ - function is divided into parts at `await` statement. Under the hood Swift rewrite every async function containing
+ suspension points to continuations.
+ 
+ - on await the method is suspended and loading of data is done in a separate job. Once the job is finished, method is resumed and continues exeucting the second part in a separate job.
+ 
+ - Swift's concurrency model is called `cooperative multitasking`. In short, this means functions should never block the current thread, but voluntarily suspend instead. A function can only be suspended at a potential suspension point (marked with await)
+ 
+ - When the function is suspended it does not mean the current thread is blocked. instead control is given back to scheduler and other jobs can run on the thread in the meantime. At a later point  the scheduler resumes the function by calling the continuation.
+ 
+ - Suspended function isn't guaranteed to resume on it's original thread.
+ */

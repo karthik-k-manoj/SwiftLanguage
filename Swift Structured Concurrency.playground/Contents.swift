@@ -111,7 +111,7 @@ loadFirstPosterFromEpisode { result in
  */
 
 func loadEpisode(episodeId: Int, completion: @escaping (Result<String, Error>) -> Void) {
-    DispatchQueue.global().async {
+    DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
         completion(.success("Load Episode One"))
     }
     
@@ -139,3 +139,11 @@ Task {
     print("Result from async method", result)
 }
 
+print("TASK IS ALREADY RUNNING")
+
+// checkedContinuation or checkedThrowingContinuation`. The inclusion of "Checked" means that both of these functions perform runtime checks
+// to ensure we call resume exactly once. Calling it more than once is a runtime error. If we discard the continuation before calling it, we also get a warning at runtime
+
+// `withUnsafeContinuation` and `withUnsafeThrowingContinuation` are a little bit more efficient at runtime because they skip the safety checks of their checked counterparts. You need to make sure to call the continuation exactly once. Not calling the continuation causes the task to never resume and calling it more than once is undefined behavior. It's good practice to write your code with checked variant and make sure they work before switching to the unsafe variants.
+
+// e

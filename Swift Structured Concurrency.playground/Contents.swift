@@ -126,7 +126,7 @@ loadEpisode(episodeId: 1) { result in
 
 
 func loadEpisode(episodeId: Int) async throws -> String {
-    try await withCheckedThrowinContinuation { cont in
+    try await withCheckedThrowingContinuation { cont in
         loadEpisode(episodeId: episodeId) {
             cont.resume(with: $0)
         }

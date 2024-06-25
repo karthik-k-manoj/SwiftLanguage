@@ -102,3 +102,40 @@ loadFirstPosterFromEpisode { result in
  
  - Suspended function isn't guaranteed to resume on it's original thread.
  */
+
+// Interfacing with completion handler
+
+/*
+ You might have function that uses completion handler. You can turn those methods to async/await method using `withCheckedContinuation`
+ You can wrap any function that takes a completion handler in an async function
+ */
+
+func loadEpisode(episodeId: Int, completion: @escaping (Result<String, Error>) -> Void) {
+    DispatchQueue.global().async {
+        completion(.success("Load Episode One"))
+    }
+    
+}
+
+loadEpisode(episodeId: 1) { result in
+    print("Result from completion handler", result)
+}
+
+// To turn this into async API, we write a new async function and wrap the invocation of the original function in a call to
+// `withCheckedThrowingContinuation`. It will run the body immediately and then suspend until we call `cont.resume` inside the body
+
+
+func loadEpisode(episodeId: Int) async throws -> String {
+    try await withCheckedThrowinContinuation { cont in
+        loadEpisode(episodeId: episodeId) {
+            cont.resume(with: $0)
+        }
+    }
+}
+
+// This task is going to be suspended and `loadEpisode` will be called on different thread
+Task {
+    let result = try await loadEpisode(episodeId: 1)
+    print("Result from async method", result)
+}
+

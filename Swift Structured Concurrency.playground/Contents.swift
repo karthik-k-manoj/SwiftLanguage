@@ -167,7 +167,7 @@ print("Waiting")
  
  */
 
-extension String {    
+extension String {
     init(id: Int) async throws {
         self = try await withCheckedThrowingContinuation { cont in
             loadEpisode(episodeId: id) { result in
@@ -180,4 +180,39 @@ extension String {
 Task {
     let myString =  try await String(id: 1)
     print("My String is", myString)
+}
+
+/*
+ async/await makes asynchornous code structured. We can make use of swift built in construct such as conditionals, loops, error handling
+ defer all work like they do in synchronous code. However async/await on it's own does not introdude concurrency i.e. multiple task
+ executing on simulatenously. For that we need a way to create new tasks
+ */
+
+/*
+ TASK
+ a task is the fundamental execution context in a swift concurrency model. Every async function is executing in a task(so are the synchronous function called by the asynchronous function)
+ 
+ Task server roughly the same purpose threads do in traditional multithreaded code. Like thread task on it's own has no concurrency.
+ It runs one function at a time. When running task encounters an await it can suspend it's execution, giving up the thread and yielding control to the scheduler in the Swift runtime. The scheduler can then run another task on the same thread. When it's time to resume
+ the first task the task will pick up exactly where it left off possibily on a different thread)
+ */
+
+/*
+ Child Tasks vs Unstructured Tasks
+ 
+ When we call an async function with await the called function will run in the same task as the caller. Creating a new task always
+ requires explicit action. We can create two kinds of tasks
+ 
+ 1) Child Task- These form the basis for structured concurrency. We create child task with one of strucuted concurrency construct
+ async let or task groups. Child tasks are organized in a tree and have a scoped lifetimes.
+ 
+ 2) Unstructured Task - These are standalone task that form the root of a new independent task tree. We create it either using Task init
+ or the factory method  `Task.detached`. The lifetime of an unstructured task is independent of the lifetime of the current task
+ 
+ */
+
+Task {
+    Task {
+        try await loadEpisode(episodeId: 1)
+    }
 }

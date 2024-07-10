@@ -31,3 +31,14 @@ let mergedDict = mainDict.merging(otherDict) { firstDictValue, secondDictValue i
 }
 
 print(mergedDict)
+
+// Create dictionary from key value pairs, if keys are duplicating perform the closure to make it unique key
+extension Sequence where Element: Hashable {
+    var frequencies: [Element: Int] {
+        let frequencyParis = self.map { ($0, 1)}
+        return Dictionary(frequencyParis) { $0 + $1 }
+    }
+}
+
+let frequencies = "hello".frequencies
+frequencies.filter { $0.value >  1 }

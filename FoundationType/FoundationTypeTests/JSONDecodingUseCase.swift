@@ -28,7 +28,45 @@ final class JSONDecodingUseCase: XCTestCase {
         // since `[String: String]` type is decodable by default we can use it directly without a custom type
         let dict = try jsonDecoder.decode([String: String].self, from: jsonData)
         
-        // assert 
+        // assert
         XCTAssertEqual(dict, ["name": "Karthik", "age": "12"])
+    }
+    
+    func testJSONDecoding() {
+        struct Root: Decodable {
+            let status: String
+            let objects: [Product]
+        }
+        
+        struct Product: Decodable {
+            let id: Int
+            let name: String
+            let available: Bool
+        }
+        
+        let jsonData = """
+        {
+          "status": "active",
+          "objects": [
+            {
+              "id": 1,
+              "name": "Object one",
+              "available": true
+            },
+            {
+              "id": 2,
+              "name": "Object two",
+              "available": false
+            },
+          ]
+        }
+        """.data(using: .utf8)!
+        
+        do {
+            _ = try JSONDecoder().decode(Root.self, from: jsonData)
+        } catch {
+            print(error)
+            XCTFail()
+        }
     }
 }

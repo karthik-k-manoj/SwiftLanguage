@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DAA0C4202C4F65D300C576CD /* FoundationType.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA0C4172C4F65D300C576CD /* FoundationType.framework */; };
+		DAA0C4302C4F66E700C576CD /* JSONDecodingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA0C42F2C4F66E700C576CD /* JSONDecodingUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		DAA0C4172C4F65D300C576CD /* FoundationType.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FoundationType.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAA0C41F2C4F65D300C576CD /* FoundationTypeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoundationTypeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAA0C42F2C4F66E700C576CD /* JSONDecodingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecodingUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 		DAA0C4232C4F65D300C576CD /* FoundationTypeTests */ = {
 			isa = PBXGroup;
 			children = (
+				DAA0C42F2C4F66E700C576CD /* JSONDecodingUseCase.swift */,
 			);
 			path = FoundationTypeTests;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 					};
 					DAA0C41E2C4F65D300C576CD = {
 						CreatedOnToolsVersion = 14.3.1;
+						LastSwiftMigration = 1430;
 					};
 				};
 			};
@@ -191,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAA0C4302C4F66E700C576CD /* JSONDecodingUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +396,7 @@
 		DAA0C42D2C4F65D300C576CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -400,6 +406,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.essentialDeveloper.FoundationTypeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -407,6 +414,7 @@
 		DAA0C42E2C4F65D300C576CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

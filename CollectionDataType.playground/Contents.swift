@@ -59,3 +59,34 @@ do {
     
     stringValueDict
 }
+
+// Dictionaries are hash tables. A dict assigns each key a position in its
+// underlying storage array based on the keys hash value. Hence key needs to be
+// `Hashable`.
+
+
+// enum without assoicated types are `Hashable` even without declaring explicitiy. Not only do this save impl work but it also keep the imp
+// up to date automatically as properties gets added or removed
+
+/*
+ if you can't make a type hashable either because it's a class or you
+ don't want one or more stored properties be considered for hashing purpose
+ you first need to make the type  `Equatable` and then you can implement
+ the `hash(into) requirement of the Hashable protocol.
+ 
+ two instances are = (as defined by == impl) must have the same hash value.
+ the reverse isn't true two instances with the same hash value don't necessarily
+ compaure equally.
+ 
+ If you need deterministic hashing (e.g. for tests) you can disable random seeding by setting the environment variable SWIFT_DETERMINISTIC_HASHING=1` but you shouldn't do this in production
+ 
+ finally be careful when using type that don't have value semantics (e.g. mutable objects) as dic keys. If you mutate an object asfter using it as dict key in a way taht changes its hash value and or equality you won't be able to find it again in the dictionary. The dictionary now stores the object in the wrong slot effectively corrupting internal storage
+ 
+ */
+
+do {
+    // using default value for a dictionary
+    let dict = ["name": "karthik", "profession": "iOS Developer"]
+    // If the key does not exist then print the default value 
+    print(dict["name", default: "noValue"])
+}

@@ -40,5 +40,14 @@ extension Sequence where Element: Hashable {
     }
 }
 
-let frequencies = "hello".frequencies
-frequencies.filter { $0.value >  1 }
+do {
+    let frequencies = "hello".frequencies
+    frequencies.filter { $0.value >  1 }
+
+    let myDictionary = ["karthik": 30, "megha": 32]
+    let array = myDictionary.map { key, value in
+        return key
+    }
+}
+
+

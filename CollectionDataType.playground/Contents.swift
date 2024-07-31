@@ -50,4 +50,12 @@ do {
     }
 }
 
-
+do {
+    let intValueDict = ["karthik": 30, "megha": 32]
+    // Want to convert this dict to [String: String]
+    let stringValueDict = intValueDict.mapValues { value in
+        "\(value)"
+    }
+    
+    stringValueDict
+}

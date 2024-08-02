@@ -90,3 +90,47 @@ do {
     // If the key does not exist then print the default value
     print(dict["name", default: "noValue"])
 }
+
+// SETS
+
+// Consider set as a dictionary that only stores keys and no values
+// Like dictionary Set is implemented with a hash table
+// Testing a value for membership is constant time operations and set elements must be `Hashable` just like dictionary keys
+
+// Use set when you need O(1) and order of elements is not important or
+// when you need to ensure that a collection contains no duplicates
+
+// Set conforms to `ExpressibleByArrayLiteral` protocol which means we can
+// initalize it with an array of literal like this
+
+let naturals: Set = [1, 2, 3, 2]
+naturals // 2 3 1 duplicates are removed
+naturals.contains(3)
+
+/*
+ Set is closely related to mathematical concept of a set. it supports all common set operations
+ */
+
+let iPods: Set = ["iPod touch", "iPod nano", "iPod mini", "iPOd shuffle"]
+let discontinuediPods: Set = ["iPod mini"]
+let currentiPods = iPods.subtracting(discontinuediPods)
+
+/*
+ We can also form the intersection of sets i.e. find all elements that are in both
+ */
+
+do {
+    var iPods: Set = ["iPod touch", "iPod nano", "iPod mini", "iPOd shuffle"]
+    let anotherSet: Set = ["iPod mini 2"]
+    iPods.formUnion(anotherSet)
+}
+
+do {
+    var iPods: Set = ["iPod touch", "iPod nano", "iPod mini", "iPOd shuffle"]
+    let anotherSet: Set = ["iPod mini"]
+    iPods.intersection(anotherSet)
+}
+
+/*
+ Almost all set operation have both non-mutating and mutating forms. mutating has form prefix
+ */

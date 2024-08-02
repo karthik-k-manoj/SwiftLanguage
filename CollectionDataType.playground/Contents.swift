@@ -87,6 +87,6 @@ do {
 do {
     // using default value for a dictionary
     let dict = ["name": "karthik", "profession": "iOS Developer"]
-    // If the key does not exist then print the default value 
+    // If the key does not exist then print the default value
     print(dict["name", default: "noValue"])
 }

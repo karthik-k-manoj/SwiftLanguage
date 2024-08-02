@@ -153,3 +153,42 @@ extension Sequence where Element: Hashable {
 }
 
 [1,2,3,12,1,3,4,5,6,4,6].unique() // [1, 2, 3, 12, 4, 5, 6]”
+
+
+// Range
+
+/*
+ a range is an interval of values and is defined by lower and upper bounds.
+ You create ranges with two range operator ..< (half open ranges) that don't
+ include their upper bound and closed range that include both bounds
+ */
+
+// Range<Int>
+let singleDigitNumner = 0..<10
+Array(singleDigitNumner)
+
+/*
+ there are alos prefix and postfix variants of these operators which are used to
+ express one-sided range
+ */
+
+// PartialRangeFrom type
+let fromZero = 0...
+
+let underFive = 0.0..<0.0
+let ZeroToFive = 1...1
+
+underFive.lowerBound
+underFive.upperBound
+
+for i in ZeroToFive {
+    print(i)
+}
+
+
+for i in fromZero {
+    print(i)
+}
+
+// PartialRangeUpTo<Character>
+let upToZ = ..<Character("z")

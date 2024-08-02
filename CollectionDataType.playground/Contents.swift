@@ -134,3 +134,22 @@ do {
 /*
  Almost all set operation have both non-mutating and mutating forms. mutating has form prefix
  */
+
+// By using internal set for bookkeeping and a filter HOF we can
+// maintain the order
+extension Sequence where Element: Hashable {
+    func unique() -> [Element] {
+        var seen: Set<Element> = []
+        
+        return filter { element in
+            if seen.contains(element) {
+                return false
+            } else {
+                seen.insert(element)
+                return true
+            }
+        }
+    }
+}
+
+[1,2,3,12,1,3,4,5,6,4,6].unique() // [1, 2, 3, 12, 4, 5, 6]”

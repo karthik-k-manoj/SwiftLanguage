@@ -52,3 +52,6 @@ do {
     (e.g. 0...Int.max). A half open range always requires at least one representable value
     that's greater than the highest value in the range.
  */
+
+let closedRangeNonEmpty = (5...5).isEmpty // false
+let halfOpenRangeEmpty = (5..<5).isEmpty // true

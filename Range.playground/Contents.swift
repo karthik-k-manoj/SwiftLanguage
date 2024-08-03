@@ -55,3 +55,38 @@ do {
 
 let closedRangeNonEmpty = (5...5).isEmpty // false
 let halfOpenRangeEmpty = (5..<5).isEmpty // true
+
+/*
+ Not all range can be iterated using for-in loop. Why?
+ Range only conforms to the collection protocol conditionally
+ if it element type conforms to `Strideable` (i.e you can jump from one element to
+ another by adding an offset) and if stide steps themselves are integers
+ */
+
+/*
+extension Range: Sequence where Bound: Strideable. Bound.Stride: SignedInteger { ... }
+ 
+In other words a range must be countable for it to be iterated over. Valid bounds for
+countable ranges (i.e match the constraints) include integer and pointer types but not
+not floating-point type becase of the integer constraint on the types Stride
+ 
+If you need to iterate over consecutive floating point values you can use stridge(from: to: by) and stride(from:through:by)
+ 
+ Before conditional protocol conformance was introduced in Swift 4.1 and 4.2 we had
+ `CountableRnage` and `CountableClosedRange` for distinguish countable from non-countable range. The name still exits as typealiases for backward compatibility.
+ 
+ You can use them as shorthand instead of the mouthful range-plus constraints. So it is till there for backward compatibility and only you can use it constraint
+*/
+
+/*
+public typealias CountableRange<Bound: Strideable> = Range<Bound> where Bound.Stride: SignedInteger
+ */
+
+
+
+
+
+
+
+
+

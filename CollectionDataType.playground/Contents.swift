@@ -185,10 +185,5 @@ for i in ZeroToFive {
     print(i)
 }
 
-
-for i in fromZero {
-    print(i)
-}
-
 // PartialRangeUpTo<Character>
 let upToZ = ..<Character("z")

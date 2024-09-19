@@ -82,11 +82,44 @@ If you need to iterate over consecutive floating point values you can use stridg
 public typealias CountableRange<Bound: Strideable> = Range<Bound> where Bound.Stride: SignedInteger
  */
 
+/*
+ Partial ranges are constructed using ... (closed) or ...< (half open) as a prefix or postfix operator. Why partial? Because they're missing one of their bounds/
+ */
 
+let fromA: PartialRangeFrom<Character> = Character("a")...
+let throughZ: PartialRangeThrough<Int> = ...2
+let upto10: PartialRangeUpTo<Int> = ..<10
 
+/*
+ Only `PartialRangeFrom` wil be Sequence if the Bounds.Stride is SignedInterger
+ `PartialRangeThrough` and `PartialRangeUpto` do not conform to `Sequence` protocol at all
+ because they are missing a lower bound`
+ 
+ Similar to `CountableRange` there is `CountablePartialRange` for `PartialRangeFrom` but with tigter constraints
+ */
 
+// Range Expression
+/*
+ All five range types conform to RangeExpression protocol.
+ Small protocol
+    - contains
+    - relative
+ */
 
+do {
+    let numbers = [1, 2, 3, 4]
+    numbers[2...] // [3, 4]
+    numbers[..<1] // [1]
+    numbers[1...2] // [2, 3]
+    numbers[...]
+}
 
+/*
+ This works because corresponding subscript declaration in the Collection protocol takes a RangeExpression rather than one of the five concrete range types. You can even omit both
+ bounds to get a slice of the entire collection:
+ 
+ number[...]
+ */
 
 
 

@@ -100,10 +100,12 @@ let upto10: PartialRangeUpTo<Int> = ..<10
 
 // Range Expression
 /*
- All five range types conform to RangeExpression protocol.
+ All five range (Range (half open range), closed range, partialrangeFrom, partialrangeThrough, PartialRangeUpto)
+ types conform to RangeExpression protocol.
  Small protocol
     - contains
-    - relative
+    - relative “For partial ranges with a missing lower bound, the relative(to:) method adds the collection’s startIndex as the lower bound. For partial ranges with a missing upper bound, the method will use the collection’s endIndex. Partial ranges enable a very compact syntax for slicing collections:”
+ 
  */
 
 do {

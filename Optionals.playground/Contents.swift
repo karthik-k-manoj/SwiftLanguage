@@ -148,3 +148,28 @@ class OptionalInit {
     // compiler would ask to init `didChange2`. Default initialization
     // only works for short hand notation `?`
 }
+
+do {
+    var a: Int? = 2
+    a = 2 // assings unconditionally.
+    print(a)
+
+    var b: Int?
+    b? = 4 // this only assings to b if b is non nil else don't
+    print(b)
+}
+
+
+extension Array {
+    subscript(guarded idx: Int) -> Element? {
+        guard (startIndex..<endIndex).contains(idx) else {
+            return nil
+        }
+        
+        return self[idx]
+    }
+}
+
+var smallArray = [2,3,4]
+let result = smallArray[guarded: 4] ?? 0
+
